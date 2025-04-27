@@ -1,70 +1,83 @@
-# Getting Started with Create React App
+# Resistance Feed: Secure Comms for the Sparks of Rebellion
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+```
+        _______
+       //  \\\\
+      //____\\\\
+     //      \\\\
+    //________\\\\
+   //__________\\\\
+  //            \\\\
+ =====================
+```
 
-## Available Scripts
+**Status:** Alpha Build - Operational but requires field testing.
 
-In the project directory, you can run:
+## Mission Briefing
 
-### `npm start`
+In times when bloated regimes, more concerned with gaudy aesthetics and self-aggrandizing rallies than effective governance, attempt to control the narrative, secure communication becomes paramount. The old channels are compromised, monitored by bureaucratic droids and forces led by figures whose pronouncements often border on the absurd – a sort of 'Galactic Empire' run by a committee seemingly inspired by inept Bond villains demanding loyalty oaths on oversized starships.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This **Resistance Feed** is an experiment in decentralized, pseudo-anonymous communication. It's a place to share intel, coordinate actions, and build reputation without revealing your core identity to every passing probe droid or data-mining operation.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Core Features
 
-### `npm test`
+*   **Passkey Identity:** Generate or use a unique 25-character passkey. This is your comm signal for the session, hashing into a unique identifier and generating your visual signature (Avatar). **Guard it well.** Losing it means losing access to that specific identity's history and reputation.
+*   **Universal Header:** Enter your passkey once in the main header to authenticate for your session.
+*   **Anonymous Posting:** Transmit messages associated only with your passkey hash.
+*   **Hashtag System:** Tag messages with relevant topics (`#AlderaanStrong`, `#ScruffyLookingNerfHerder`).
+*   **Reputation via Action (Cloud Function Backend):**
+    *   Creating posts contributes to your standing.
+    *   Founding a *new* hashtag grants founder status (visible eventually).
+    *   Reputation logic runs securely in the Firebase Cloud Nebula.
+*   **Voting Mechanism (Cloud Function Backend):** Upvote/Downvote posts to signal importance. Votes influence reputation (logic handled server-side by `processVote` function).
+*   **Real-Time Feed:** See new transmissions as they arrive via Firestore stream.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Tech Stack - Our Alliance Toolkit
 
-### `npm run build`
+*   **Frontend:** React (via Create React App)
+*   **Styling:** SCSS
+*   **State Management:** React Context API (`AuthContext` for passkey)
+*   **Backend & Database:** Firebase Cloud Firestore, Firebase Cloud Functions (v2), Firebase Hosting
+*   **Hashing:** crypto-js (SHA-256 for passkey hashing)
+*   **Utilities:** date-fns (for timestamps)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## Getting Started - Joining the Network
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1.  **Clone the Holonet Relay:**
+    ```bash
+    git clone https://github.com/jahonen/resistance.git
+    cd resistance
+    ```
+2.  **Install Power Converters (Dependencies):**
+    ```bash
+    npm install
+    cd functions && npm install && cd ..
+    ```
+3.  **Configure Firebase:**
+    *   Ensure you have the Firebase CLI installed (`npm install -g firebase-tools`) and are logged in (`firebase login`).
+    *   Connect this local repo to your Firebase project (if not done already): `firebase use --add` (Select your Firebase project, e.g., `rebel-d4a51`).
+    *   Create a `.env` file in the root directory based on `.env.sample` (if one exists) or configure `src/firebase/config.js` directly with your Firebase project's web app configuration details.
+4.  **Deploy Cloud Functions:**
+    *   Make sure the necessary Cloud APIs are enabled in your Google Cloud Project (`cloudfunctions`, `cloudbuild`, `artifactregistry`, `run`, `eventarc`, `pubsub`, `storage`).
+    *   Deploy the backend logic:
+        ```bash
+        firebase deploy --only functions
+        ```
+5.  **Launch Local Monitor:**
+    ```bash
+    npm start
+    ```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Security & Anonymity Protocol
 
-### `npm run eject`
+This system uses passkeys for pseudo-anonymity. Your identity *within the feed* is tied to the SHA-256 hash of your passkey. 
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+*   **Don't reuse passkeys** from other systems.
+*   **Keep your passkey secret.** Anyone with your passkey can post as you within this system.
+*   This **does not** hide your network activity (IP address etc.) from the underlying hosting provider (Firebase/Google Cloud) or potentially sophisticated network eavesdroppers. True operational security requires additional layers (VPNs, Tor, etc.) beyond the scope of this app.
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Join the Resistance!
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+This is an early build. Bugs are expected, features are planned. Feel free to fork, contribute, and help build a communication network worthy of the Rebel Alliance.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*May the Force (and good code) be with you.*
