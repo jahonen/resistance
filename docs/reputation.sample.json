@@ -1,0 +1,261 @@
+{
+    "reputationSystem": {
+      "version": "1.0",
+      "description": "Hashtag-specific reputation cascade model with passkey-based identity",
+      
+      "hashtags": [
+        {
+          "id": "climate-action-seattle",
+          "name": "#ClimateActionSeattle",
+          "description": "Coordinating climate activism in Seattle area",
+          "created_at": "2025-01-15T08:30:12Z",
+          "founder_passkey_hash": "a7f9b3c2d1e0...",
+          "metrics": {
+            "post_count": 1423,
+            "total_participants": 289,
+            "active_participants_last_month": 156
+          }
+        },
+        {
+          "id": "housing-rights-nyc",
+          "name": "#HousingRightsNYC",
+          "description": "Fighting for tenant rights and affordable housing in NYC",
+          "created_at": "2025-02-23T14:22:05Z",
+          "founder_passkey_hash": "f8e7d6c5b4a3...",
+          "metrics": {
+            "post_count": 971,
+            "total_participants": 187,
+            "active_participants_last_month": 92
+          }
+        }
+      ],
+      
+      "reputationScores": [
+        {
+          "hashtag_id": "climate-action-seattle",
+          "participants": [
+            {
+              "passkey_hash": "a7f9b3c2d1e0...", 
+              "reputation_score": 100,
+              "founder_distance": 0,
+              "is_founder": true,
+              "first_contribution": "2025-01-15T08:30:12Z",
+              "last_activity": "2025-04-22T16:15:33Z",
+              "contribution_metrics": {
+                "posts": 78,
+                "comments": 156,
+                "votes_cast": 412,
+                "votes_received": 945
+              }
+            },
+            {
+              "passkey_hash": "b8c9d0e1f2g3...",
+              "reputation_score": 87,
+              "founder_distance": 1,
+              "is_founder": false,
+              "first_contribution": "2025-01-16T12:45:22Z",
+              "last_activity": "2025-04-21T09:33:17Z",
+              "contribution_metrics": {
+                "posts": 42,
+                "comments": 91,
+                "votes_cast": 267,
+                "votes_received": 522
+              },
+              "reputation_sources": [
+                {
+                  "source_passkey_hash": "a7f9b3c2d1e0...",
+                  "amount": 87,
+                  "timestamp": "2025-01-18T15:22:08Z"
+                }
+              ]
+            },
+            {
+              "passkey_hash": "c9d0e1f2g3h4...",
+              "reputation_score": 64,
+              "founder_distance": 2,
+              "is_founder": false,
+              "first_contribution": "2025-01-22T18:12:55Z",
+              "last_activity": "2025-04-23T07:41:52Z",
+              "contribution_metrics": {
+                "posts": 31,
+                "comments": 88,
+                "votes_cast": 184,
+                "votes_received": 276
+              },
+              "reputation_sources": [
+                {
+                  "source_passkey_hash": "b8c9d0e1f2g3...",
+                  "amount": 64,
+                  "timestamp": "2025-01-25T09:56:33Z"
+                }
+              ]
+            },
+            {
+              "passkey_hash": "d0e1f2g3h4i5...",
+              "reputation_score": 48,
+              "founder_distance": 3,
+              "is_founder": false,
+              "first_contribution": "2025-02-05T10:33:42Z",
+              "last_activity": "2025-04-20T14:22:09Z",
+              "contribution_metrics": {
+                "posts": 19,
+                "comments": 67,
+                "votes_cast": 142,
+                "votes_received": 201
+              },
+              "reputation_sources": [
+                {
+                  "source_passkey_hash": "c9d0e1f2g3h4...",
+                  "amount": 48,
+                  "timestamp": "2025-02-08T19:17:25Z"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "hashtag_id": "housing-rights-nyc",
+          "participants": [
+            {
+              "passkey_hash": "f8e7d6c5b4a3...",
+              "reputation_score": 100,
+              "founder_distance": 0,
+              "is_founder": true,
+              "first_contribution": "2025-02-23T14:22:05Z",
+              "last_activity": "2025-04-21T11:09:47Z",
+              "contribution_metrics": {
+                "posts": 56,
+                "comments": 112,
+                "votes_cast": 287,
+                "votes_received": 701
+              }
+            },
+            {
+              "passkey_hash": "a7f9b3c2d1e0...", 
+              "reputation_score": 12,
+              "founder_distance": 3,
+              "is_founder": false,
+              "first_contribution": "2025-03-15T16:42:19Z",
+              "last_activity": "2025-04-05T08:55:22Z",
+              "contribution_metrics": {
+                "posts": 3,
+                "comments": 9,
+                "votes_cast": 27,
+                "votes_received": 18
+              },
+              "reputation_sources": [
+                {
+                  "source_passkey_hash": "g7h6i5j4k3l2...",
+                  "amount": 12,
+                  "timestamp": "2025-03-17T12:39:45Z"
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      
+      "reputationCalculation": {
+        "formulaDescription": "Reputation cascade model with diminishing value by distance from founders",
+        "founderInitialValue": 100,
+        "distanceDiminishingFactor": 0.85,
+        "calculationMethods": {
+          "maxPossibleReputation": "100 * (distanceDiminishingFactor ^ founderDistance)",
+          "actualReputation": "Sum of weighted upvotes from higher-tier participants",
+          "votingPower": "reputation / 100"
+        },
+        "reputationDecay": {
+          "inactivityThreshold": "30 days",
+          "decayRate": "2 points per day after threshold",
+          "minimumReputation": 1
+        },
+        "reputationRecovery": {
+          "recoveryRate": "Based on consistent participation and weighted upvotes",
+          "maxRecoveryPerDay": "5 points"
+        }
+      },
+      
+      "voteWeighting": {
+        "description": "System for calculating the weight of votes based on reputation",
+        "types": [
+          {
+            "type": "upvote",
+            "baseEffect": "positive",
+            "weightMultiplier": 1.0
+          },
+          {
+            "type": "downvote",
+            "baseEffect": "negative",
+            "weightMultiplier": 0.8
+          }
+        ],
+        "calculation": {
+          "baseWeight": "voter's reputation / 100",
+          "adjustments": [
+            {
+              "factor": "voter's recent activity",
+              "effect": "±20% based on activity level"
+            },
+            {
+              "factor": "voter's contribution quality",
+              "effect": "±15% based on received upvotes"
+            }
+          ]
+        }
+      },
+      
+      "contentScoring": {
+        "post": {
+          "formula": "sum(voter_reputation * vote_type * weight_multiplier)",
+          "thresholds": {
+            "trending": 50,
+            "controversial": "abs(score) > 20 AND (upvotes/downvotes ratio between 0.4 and 0.6)",
+            "hidden": -30
+          }
+        },
+        "comment": {
+          "formula": "sum(voter_reputation * vote_type * weight_multiplier * 0.5)",
+          "thresholds": {
+            "highlighted": 25,
+            "collapsed": -15
+          }
+        }
+      },
+      
+      "antiManipulationSafeguards": {
+        "voteLimits": {
+          "maxVotesPerDay": 100,
+          "maxVotesToSingleUser": "10% of daily vote limit"
+        },
+        "coordinated_voting_detection": {
+          "enabled": true,
+          "factors": [
+            "Timing patterns",
+            "Voting similarity across users",
+            "Network graph analysis"
+          ],
+          "actions": [
+            "Flag for review",
+            "Temporary vote weight reduction",
+            "Reputation penalty for confirmed manipulation"
+          ]
+        },
+        "sybil_attack_prevention": {
+          "approach": "Reputation cascade system limits influence of new accounts",
+          "joining_difficulty": "Scales with community size to prevent mass account creation"
+        }
+      },
+      
+      "crossHashtagInteractions": {
+        "description": "How reputation interacts across different hashtags",
+        "visibilityRules": {
+          "can_see_other_hashtag_reputation": true,
+          "shows_primary_hashtag_only": false
+        },
+        "independence": {
+          "reputation_transfers": "None - reputation strictly siloed by hashtag",
+          "founder_status_transfers": "None - each hashtag has independent founders"
+        }
+      }
+    }
+  }

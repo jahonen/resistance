@@ -1,0 +1,86 @@
+@import './index.scss'; // Import base styles and variables
+
+.App {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background-color: darken($background-color, 5%); // Slightly darker header
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid darken($background-color, 10%);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  position: sticky; // Keep header visible on scroll
+  top: 0;
+  z-index: 10;
+
+  .app-logo {
+    height: 40px; // Adjust height as needed
+    width: auto;  // Maintain aspect ratio
+    display: block; // Remove extra space below image
+  }
+
+  nav {
+    a {
+      color: $text-color;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: bold;
+      transition: color 0.2s ease;
+
+      &:hover,
+      &.active { // Assuming react-router adds 'active' class
+        color: $primary-action-color;
+      }
+    }
+  }
+}
+
+.app-main {
+  flex-grow: 1; // Allow main content to take up remaining space
+  padding: 1rem; // Add padding around main content area
+  // Background handled by body or html usually
+}
+
+// ---- Remove Default CRA Styles ----
+/*
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+*/
+// --- End Remove Default CRA Styles ---

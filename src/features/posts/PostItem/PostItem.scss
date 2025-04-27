@@ -1,0 +1,90 @@
+@import '../../../index.scss';
+
+.post-item {
+  background-color: darken($background-color, 3%);
+  border: 1px solid darken($background-color, 8%);
+  border-radius: 6px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  color: $text-color;
+
+  .post-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.75rem;
+    gap: 0.75rem;
+
+    .author-avatar {
+      flex-shrink: 0; // Prevent avatar from shrinking
+      // HexagonalHashAvatar handles its own size
+    }
+
+    .post-meta {
+      display: flex;
+      flex-direction: column; // Stack meta info if needed later
+      font-size: 0.9rem;
+      color: $secondary-accent-color;
+
+      .timestamp {
+        // Style for time ago
+      }
+      // Placeholder for author reputation/founder badge
+    }
+  }
+
+  .post-content {
+    margin-bottom: 1rem;
+    p {
+      margin: 0;
+      line-height: 1.6;
+      white-space: pre-wrap; // Preserve line breaks
+      word-wrap: break-word; // Break long words
+    }
+  }
+
+  .post-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.9rem;
+    color: $secondary-accent-color;
+
+    .hashtags-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+
+      .hashtag-link {
+        color: $secondary-accent-color;
+        padding: 0.2rem 0.5rem;
+        background-color: darken($background-color, 8%);
+        border-radius: 4px;
+        transition: background-color 0.2s ease, color 0.2s ease;
+
+        &:hover {
+          color: $primary-action-color;
+          background-color: darken($background-color, 12%);
+          text-decoration: none;
+        }
+      }
+    }
+
+    .vote-section {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+
+      .vote-count {
+        font-weight: bold;
+
+        &.up {
+          color: lighten($primary-action-color, 15%);
+        }
+        &.down {
+          color: lighten($warning-color, 10%); 
+        }
+      }
+      // Buttons will be styled in VoteButtons component
+    }
+  }
+}

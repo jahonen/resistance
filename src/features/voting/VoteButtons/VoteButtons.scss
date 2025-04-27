@@ -1,0 +1,50 @@
+@import '../../../index.scss';
+
+.vote-buttons-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem; // Space between buttons
+
+  .vote-button {
+    background: none;
+    border: 1px solid $secondary-accent-color;
+    color: $secondary-accent-color;
+    padding: 0.2rem 0.5rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+
+    &.up:hover:not(:disabled) {
+      background-color: lighten($primary-action-color, 10%);
+      border-color: lighten($primary-action-color, 10%);
+      color: $background-color;
+    }
+
+    &.down:hover:not(:disabled) {
+      background-color: lighten($warning-color, 10%);
+      border-color: lighten($warning-color, 10%);
+      color: $background-color;
+    }
+
+    // TODO: Add styles for 'active' state when user has voted
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &.loading {
+      // Optional: Add loading indicator style
+      cursor: wait;
+    }
+  }
+
+  .vote-error-message {
+    color: $warning-color;
+    font-size: 0.8rem;
+    margin-left: 0.5rem; // Space it from the buttons
+  }
+}

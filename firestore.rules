@@ -1,0 +1,54 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // --- Default Rule: Deny all access unless explicitly allowed ---
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // --- User Profiles (/userProfiles/{userHash}) ---
+    // Assumes {userHash} is the SHA-256 hash of the passkey provided by the client.
+    match /userProfiles/{userHash} {
+      // Anyone can read profiles.
+      allow get, list: if true;
+
+      // Anyone can create a profile document.
+      // Optional: Add basic validation for required fields if desired.
+      // Example: request.resource.data.keys().hasAll(['passkeyHash', 'createdAt'])
+      allow create: if true;
+
+      // NO ONE can update or delete profiles.
+      allow update, delete: if false;
+    }
+
+    // --- Posts Collection (/posts/{postId}) ---
+    match /posts/{postId} {
+      // Anyone can read posts.
+      allow get, list: if true;
+
+      // Anyone can create posts.
+      // Optional: Add basic validation for required fields if desired.
+      // Example: request.resource.data.keys().hasAll(['authorHash', 'text', 'createdAt'])
+      allow create: if true;
+
+      // NO ONE can update or delete posts.
+      allow update, delete: if false;
+    }
+
+    // --- Hashtags Collection (/hashtags/{hashtagId}) ---
+    match /hashtags/{hashtagId} {
+      // Anyone can read hashtag documents.
+      allow get, list: if true;
+
+      // Anyone can create hashtag documents.
+      // Optional: Add basic validation for required fields if desired.
+      // Example: request.resource.data.keys().hasAll(['createdAt'])
+      allow create: if true;
+
+      // NO ONE can update or delete hashtag documents.
+      allow update, delete: if false;
+    }
+  }
+}
